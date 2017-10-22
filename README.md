@@ -19,6 +19,7 @@ Rscript ./R/create_county_akhi.R
 Rscript ./R/create_state_akhi.R
 ```
 Now drag and drop the ./data/shapefiles/cb_2013_us_county_akhi_20m/cb_2013_us_county_akhi_20m.shp file on to http://mapshaper.org/ and click import to verify the new shapefile.  
+<img src="images/screenshot_mapshaper_verify_600x394.jpg"/>
 
 ### 4. Transform the CDC diabetes and obesity data
 This loads data from spreadsheets and joins it with a modified 2013 US Census County shapefile.  
