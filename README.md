@@ -3,7 +3,7 @@ CDC diabetes and obesity data flexdashboard
 
 ### 1. Clone the repository  
 ```bash
-git clone 
+git clone https://github.com/stoneyv/cdc_diabetes.git
 ```
 ### 2. Download the data  
 ```bash
