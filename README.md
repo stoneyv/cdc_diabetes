@@ -1,6 +1,11 @@
 # cdc_diabetes  
 CDC diabetes and obesity data flexdashboard
 
+static diabetes tmap dashboard  
+https://rockourdata.nyc3.digitaloceanspaces.com/county_diabetes_tmap_flexdash.html
+tmap to interactive leaflet diabetes map dashboard   
+https://rockourdata.nyc3.digitaloceanspaces.com/county_diabetes_tmap2leaflet_flexdash.hmtl
+
 ### 1. Clone the repository  
 ```bash
 git clone https://github.com/stoneyv/cdc_diabetes.git
