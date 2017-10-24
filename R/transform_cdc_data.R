@@ -1,5 +1,6 @@
 library(dplyr)
 library(data.table)
+library(feather)
 library(ggplot2)
 library(readxl)
 library(rgdal)
@@ -56,6 +57,9 @@ cdc_dm_df <- data.frame( state=cdc_dm_abc_df$state,
                          dm_age_adj_up_conf=cdc_dm_bo2bu_df$age_adj_up_conf) %>%
                          filter(state != 'Puerto Rico')
 
+filename <- './data/cdc_dm_2013.feather'
+write_feather(cdc_dm_df, filename)
+
 # Obesity
 # State, FIPS Codes, County
 cdc_ob_abc_df <- read_excel('./data/cdc/OB_PREV_ALL_STATES.xlsx',
@@ -97,6 +101,9 @@ cdc_ob_df <- data.frame( state=cdc_ob_abc_df$state,
                          ob_age_adj_up_conf=cdc_ob_bo2bu_df$age_adj_up_conf) %>%
                          filter(state != 'Puerto Rico')
 
+filename <- './data/cdc_ob_2013.feather'
+write_feather(cdc_ob_df, filename)
+
 # Merge County shapefile with 2013 diabetes data
 # Both base an sp have merge functions.  This resolves to base::merge
 dm_2013_sdf <- merge(counties, cdc_dm_df,
@@ -104,10 +111,13 @@ dm_2013_sdf <- merge(counties, cdc_dm_df,
                     by.y="geoid",
                     suffixes = c(".x",".y"))
 
-writeOGR(dm_2013_sdf,
-         dsn = "./data/shapefiles/cdc_diabetes_2013_us_county_akhi_20m",
-         layer = "cdc_diabetes_2013_us_county_akhi_20m",
-         driver="ESRI Shapefile")
+filename <- "./data/shapefiles/cdc_diabetes_2013_us_county_akhi_20m"
+layername <- "cdc_diabetes_2013_us_county_akhi_20m"
+if (!file.exists(filename))
+    writeOGR(dm_2013_sdf,
+             dsn = filename,
+             layer = layername,
+             driver="ESRI Shapefile")
 
 
 # Merge County shapefile with 2013 obesity data
@@ -116,7 +126,10 @@ ob_2013_sdf <- merge(counties, cdc_ob_df,
                      by.y="geoid",
                      suffixes = c(".x",".y"))
 
-writeOGR(ob_2013_sdf,
-         dsn = "./data/shapefiles/cdc_obesity_2013_us_county_akhi_20m",
-         layer = "cdc_obesity_2013_us_county_akhi_20m",
-         driver="ESRI Shapefile")
+filename <-"./data/shapefiles/cdc_obesity_2013_us_county_akhi_20m"
+layername <- "cdc_obesity_2013_us_county_akhi_20m"
+if (!file.exists(filename))
+    writeOGR(ob_2013_sdf,
+             dsn = filename,
+             layer = layername,
+             driver="ESRI Shapefile")
