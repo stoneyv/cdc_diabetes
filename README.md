@@ -27,4 +27,7 @@ This loads data from spreadsheets and joins it with a modified 2013 US Census Co
 Rscript ./R/transform_cdc_data.R
 ```
 ### 5. Create one of the dashboards such as flexdashboard, shiny + flexdashboard
-This is work in progress.
+* Open the ./R/county_diabetes_tmap_flexdash.Rmd file in rstudio.
+* Click the knit button to generate the flexdashboard html file.
+* There is an R version of the file to make it easier to debug modifications to the dashboard.
+* If you uncomment the ttm() line the tmap will be implemented as an interactive leaflet map.
