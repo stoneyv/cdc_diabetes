@@ -33,6 +33,6 @@ us_aea <- us_aea[!us_aea$STATEFP %in% c("02", "15", "72"),]
 us_aea <- rbind(us_aea, alaska, hawaii)
 
 writeOGR(us_aea,
-         dsn = "../data/shapefiles/cb_2013_us_state_akhi_20m",
+         dsn = "./data/shapefiles/cb_2013_us_state_akhi_20m",
          layer = "cb_2013_us_state_akhi_20m",
          driver="ESRI Shapefile")
