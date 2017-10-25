@@ -33,6 +33,7 @@ info
 <img src="images/screenshot_mapshaper_verify.png"/>
 
 ### 5. Create one of the dashboards such as flexdashboard, shiny + flexdashboard
+NOTE: If you receive a YAML error you may be missing the CRAN rmapshaper library.  If you have difficulty installing the rmapshaper library you may be missing the folowing system libraries. jq, protobuf, protobuf-compiler.  You can knit the project without the orientation and it will work without the rmapshaper library.
 * Open the ./R/county_diabetes_tmap_flexdash.Rmd file in rstudio.
 * Click the knit button to generate the flexdashboard html file.
 * There is an R version of the file to make it easier to debug modifications to the dashboard.
