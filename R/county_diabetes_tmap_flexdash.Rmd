@@ -52,8 +52,7 @@ map_nc <- tm_shape(NC_counties, projection = 2264) +
 dm_2013_df <- read_feather('../data/cdc_dm_2013.feather')
 dm_table <- rhandsontable(dm_2013_df, width = 700, height = 290)
 
-ttm()
-
+tmap_mode("view")
 ```
 
 
@@ -62,13 +61,15 @@ Row {data-height=600}
 ### US
 
 ```{r}
-map_conus_akhi
+# Remove tm_view to output a static map
+map_conus_akhi +  tm_view(alpha = 1, basemaps = NA, basemaps.alpha = 0)
 ```
 
 ### State
 
 ```{r}
-map_nc
+# Remove tm_view to output a static map
+map_nc +  tm_view(alpha = 1, basemaps = NA, basemaps.alpha = 0)
 ```
 
 Row {data-height=300}
