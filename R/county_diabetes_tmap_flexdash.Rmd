@@ -1,9 +1,12 @@
 ---
 title: "2013 Percentage Diabetes Diagnosed by US County"
-output: flexdashboard::flex_dashboard
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
 ---
 
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = TRUE)
 library(dplyr)
 library(data.table)
 library(feather)
@@ -19,8 +22,8 @@ counties <- readOGR(dsn = "../data/shapefiles/cdc_diabetes_2013_us_county_akhi_2
 states <- readOGR(dsn = "../data/shapefiles/cb_2013_us_state_akhi_20m",
  layer = "cb_2013_us_state_akhi_20m")
 
-NC_counties <- counties %>%
-                 subset(STATEFP == "37")
+ALMI_counties <- counties %>%
+                   subset(STATEFP %in% c("01","28"))
 
 map_conus_akhi <- tm_shape(counties, projection = 2163) +
                   tm_polygons("dm_prcn",
@@ -37,7 +40,9 @@ map_conus_akhi <- tm_shape(counties, projection = 2163) +
                             frame = FALSE,
                             inner.margins = c(0.2, 0.1, 0.05, 0.05))
 
-map_nc <- tm_shape(NC_counties, projection = 2264) +
+# Use Alabama West EPSG:26930 projection                            
+# https://github.com/veltman/d3-stateplane
+map_ALMI <- tm_shape(ALMI_counties, projection = 26930 ) +
           tm_polygons("dm_prcn",
                       border.col = "gray80",
                       border.alpha = .5,
@@ -50,7 +55,7 @@ map_nc <- tm_shape(NC_counties, projection = 2264) +
                     inner.margins = c(0.2, 0.1, 0.05, 0.05))
 
 dm_2013_df <- read_feather('../data/cdc_dm_2013.feather')
-dm_table <- rhandsontable(dm_2013_df, width = 700, height = 290)
+dm_table <- rhandsontable(dm_2013_df, width = 800, height = 350)
 
 tmap_mode("view")
 ```
@@ -58,21 +63,21 @@ tmap_mode("view")
 
 Row {data-height=600}
 -------------------------------------
-### US
+### US Counties
 
 ```{r}
 # Remove tm_view to output a static map
 map_conus_akhi +  tm_view(alpha = 1, basemaps = NA, basemaps.alpha = 0)
 ```
 
-### State
+### Misissippi, Alabama
 
 ```{r}
 # Remove tm_view to output a static map
-map_nc +  tm_view(alpha = 1, basemaps = NA, basemaps.alpha = 0)
+map_ALMI +  tm_view(alpha = 1, basemaps = NA, basemaps.alpha = 0)
 ```
 
-Row {data-height=300}
+Row {data-height=310}
 -------------------------------------
 
 ### Data
