@@ -23,14 +23,18 @@ https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/
 Rscript ./R/create_county_akhi.R
 Rscript ./R/create_state_akhi.R
 ```
-Now drag and drop the ./data/shapefiles/cb_2013_us_county_akhi_20m/cb_2013_us_county_akhi_20m.shp file on to http://mapshaper.org/ and click import to verify the new shapefile.  
-<img src="images/screenshot_mapshaper_verify_600x394.jpg"/>
 
 ### 4. Transform the CDC diabetes and obesity data
 This loads data from spreadsheets and joins it with a modified 2013 US Census County shapefile.  
 ```bash
 Rscript ./R/transform_cdc_data.R
 ```
+Now drag and drop the ./data/shapefiles/cb_2013_us_county_akhi_20m/cb_2013_us_county_akhi_20m.shp file on to http://mapshaper.org/ and click import to verify the new shapefile.  Click console and enter info to see the data that has been joined with the shapefile.
+```
+info
+```
+<img src="images/screenshot_mapshaper_verify.png"/>
+
 ### 5. Create one of the dashboards such as flexdashboard, shiny + flexdashboard
 * Open the ./R/county_diabetes_tmap_flexdash.Rmd file in rstudio.
 * Click the knit button to generate the flexdashboard html file.
