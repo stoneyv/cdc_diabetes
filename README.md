@@ -46,7 +46,8 @@ a. Open the ./R/county_diabetes_tmap_flexdash.Rmd file in rstudio.
 b. Click the knit button to generate the flexdashboard html file.  
 c. There is an R version of the file to make it easier to debug modifications to the dashboard.  
 
-NOTE: you can do this from the command line as well. Invoke R from the main cdc_diabetes directory instead of cdc_diabetes/R so that the relative paths for reading data and shapefiles match.
+NOTE: you can do this from the command line as well. Invoke R from the main cdc_diabetes directory instead of cdc_diabetes/R so that the relative paths for reading data and shapefiles match.  
+
 Mac OSX or Linux example  
 ```bash
 R -e "rmarkdown::render(input=\"./R/county_diabetes_tmap_flexdash.Rmd\", output_dir=\"./R\")"
