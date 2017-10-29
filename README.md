@@ -17,6 +17,10 @@ cd cdc_diabetes
 chmod +x download-data-cdc.sh  
 ./download-data-cdc.sh
 ```
+NOTE: If you are using a MS Windows OS and do not have a bash shell or an Rscript command, you can still call R scripts from the command line by invoking R with the -e option.  Look below for an example of invoking R from a regular Windows shell.
+
+MS now officially supports an Ubuntu subsystem for Windows 10 with the caveat of not manipulating subsystem files with Windows applications.  With older versions of Windows you might install cygwin so that you can run the data download bash shell script.  
+
 ### 3. Create shapefiles with AK,HI below the US.
 Bob Rudis explains how to do this with maptools::elide here  
 https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/  
@@ -41,3 +45,15 @@ NOTE: If you receive a YAML error you may be missing the CRAN rmapshaper library
 a. Open the ./R/county_diabetes_tmap_flexdash.Rmd file in rstudio.  
 b. Click the knit button to generate the flexdashboard html file.  
 c. There is an R version of the file to make it easier to debug modifications to the dashboard.  
+
+NOTE: you can do this from the command line as well. Invoke R from the main cdc_diabetes directory instead of cdc_diabetes/R so that the relative paths for reading data and shapefiles match.  
+
+Mac OSX or Linux example  
+```bash
+R -e "rmarkdown::render(input=\"./R/county_diabetes_tmap_flexdash.Rmd\", output_dir=\"./R\")"
+```
+Windows terminal example  
+```
+"C:\Program Files\R\R-3.4.2\bin\x64\R.exe" -e "rmarkdown::render(input='county_diabetes_tmap_flexdash.Rmd', output_dir=\'.\R\')"
+```
+
