@@ -1,0 +1,85 @@
+library(dplyr)
+library(feather)
+library(leaflet)
+library(DT)
+library(rgdal)
+#library(tmap)
+#library(tmaptools)
+
+#counties <- readOGR(dsn = "../data/shapefiles/cdc_diabetes_2013_us_county_akhi_20m",
+#                    layer ="cdc_diabetes_2013_us_county_akhi_20m",
+#                    GDAL1_integer64_policy = TRUE)
+
+#counties@data$dm_percent <- counties@data$dm_prcn
+
+counties <- readOGR(dsn = "../data/shapefiles/cb_2013_us_county_20m",
+                    layer ="cb_2013_us_county_20m",
+                    GDAL1_integer64_policy = TRUE)
+
+states <- readOGR(dsn = "../data/shapefiles/cb_2013_us_state_20m",
+                    layer ="cb_2013_us_state_20m")
+
+# Remove polygons outside of continental US
+# https://www.datascienceriot.com/mapping-us-counties-in-r-with-fips/kris/
+#
+#  Alaska(2), Hawaii(15), Puerto Rico (72),
+#  Guam (66), Virgin Islands (78), American Samoa (60)
+#  Mariana Islands (69), Micronesia (64),
+#  Marshall Islands (68), Palau (70), Minor Islands (74)
+#
+counties <- counties[!counties$STATEFP %in%
+  					     c("02", "15", "72", "66",
+  					       "78", "60", "69", "64",
+  					       "68", "70", "74"),]
+counties <- counties[!counties$STATEFP %in%
+  					     c("81", "84", "86", "87",
+  					       "89", "71", "76", "95",
+  					       "79"),]
+
+states <- states[!states$STATEFP %in%
+  					     c("02", "15", "72", "66",
+  					       "78", "60", "69", "64",
+  					       "68", "70", "74"),]
+states <- states[!states$STATEFP %in%
+  					     c("81", "84", "86", "87",
+  					       "89", "71", "76", "95",
+  					       "79"),]
+
+dm_2013_df <- read_feather('../data/cdc_dm_2013.feather')
+
+counties2 <- merge(counties, dm_2013_df,
+                   by.x="GEOID",
+                   by.y="geoid",
+                   all.x=TRUE,
+                   suffixes = c(".x",".y"))
+
+pal_func <- leaflet::colorQuantile(palette = "YlOrRd",
+                          domain=c(0,25),
+                          n = 5)
+p_popup <- paste0(counties2$county," ", counties2$dm_percent, " %")
+
+leaflet(counties2) %>%
+  addPolygons(data=states,
+              color = "black", weight = 0.5,
+              opacity = 1.0) %>%
+  addPolygons(data = counties2, color = "grey20", weight = 0.4,
+              smoothFactor = 0.5,
+              opacity = 0.3, fillOpacity = 0.5, 
+              fillColor = ~pal_func(dm_percent),
+              label = ~paste0(county, " : ",
+                         formatC(dm_percent, big.mark = ",")),
+                         highlightOptions = highlightOptions(color = "white",
+                                        weight = 0.5,
+                                        bringToFront = TRUE)) %>%
+  addLegend("bottomright", title = "% diabetes",
+            colorNumeric("YlOrRd", counties2$dm_percent), 
+            values = ~dm_percent,
+            labFormat = labelFormat(suffix = ' %', between = ', ',
+                                    transform = function(x) x)) %>%
+  fitBounds(lng1 = -128.41,
+            lat1 = 50.63,
+            lng2 = -63.98,
+            lat2 = 21.86)
+
+dm_2013_df <- read_feather('../data/cdc_dm_2013.feather')
+dm_table <- datatable(dm_2013_df)
