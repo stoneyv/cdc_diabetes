@@ -1,7 +1,11 @@
 # cdc_diabetes  
 CDC diabetes and obesity data flexdashboard
 
+tmap to leaflet flexdashboard
 https://rockourdata.nyc3.digitaloceanspaces.com/county_diabetes_tmap_flexdash.html  
+
+leaflet flexdashboard
+https://rockourdata.nyc3.digitaloceanspaces.com/county_diabetes_leaflet.html
 
 ### 1. Clone the repository  
 ```bash
@@ -32,9 +36,8 @@ info
 ```
 <img src="images/screenshot_mapshaper_verify.png"/>
 
-### 5. Create one of the dashboards such as flexdashboard, shiny + flexdashboard
-NOTE: If you receive a YAML error you may be missing the CRAN rmapshaper library.  If you have difficulty installing the rmapshaper library you may be missing the folowing system libraries. jq, protobuf, protobuf-compiler.  You can knit the project without the orientation and it will work without the rmapshaper library.
-* Open the ./R/county_diabetes_tmap_flexdash.Rmd file in rstudio.
-* Click the knit button to generate the flexdashboard html file.
-* There is an R version of the file to make it easier to debug modifications to the dashboard.
-* If you uncomment the ttm() line the tmap will be implemented as an interactive leaflet map.
+### 5. Create one of the flexdashboards.  Currently there is a leaflet and a tmap to leaflet implementation.
+NOTE: If you receive a YAML error you may be missing the CRAN rmapshaper library.  If you have difficulty installing the rmapshaper library you may be missing the folowing system libraries. jq, protobuf, protobuf-compiler.  You can knit the project without the orientation and it will work without the rmapshaper library.  
+a. Open the ./R/county_diabetes_tmap_flexdash.Rmd file in rstudio.  
+b. Click the knit button to generate the flexdashboard html file.  
+c. There is an R version of the file to make it easier to debug modifications to the dashboard.  
