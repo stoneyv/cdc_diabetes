@@ -1,5 +1,5 @@
 library(dplyr)
-library(rhandsontable)
+library(DT)
 library(feather)
 library(rgdal)
 library(tmap)
@@ -43,7 +43,9 @@ map_ALMI <- tm_shape(ALMI_counties, projection = 26930 ) +
                     inner.margins = c(0.2, 0.1, 0.05, 0.05))
 
 dm_2013_df <- read_feather('../data/cdc_dm_2013.feather')
-dm_table <- rhandsontable(dm_2013_df, width = 800, height = 350)
+dm_table <- DT::datatable(dm_2013_df,
+                          class = c('compact','table-hover','table-striped'))
+dm_table
 
 tmap_mode("view")
 

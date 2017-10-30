@@ -2,7 +2,7 @@
 title: "2013 Percentage Diabetes Diagnosed by US County"
 output:
   flexdashboard::flex_dashboard:
-    orientation: columns
+    orientation: rows
 ---
 
 ```{r setup, include=FALSE}
@@ -60,7 +60,7 @@ pal_func <- leaflet::colorQuantile(palette = "YlOrRd",
 dm_2013_df <- read_feather('../data/cdc_dm_2013.feather')
 ```
 
-Column
+Row
 -------------------------------------
 ### US counties
 ```{r}
@@ -88,12 +88,13 @@ leaflet(counties2) %>%
             lat2 = 21.86)
 ```
 
-Column
+Row
 -------------------------------------
 
 ### Data
 ```{r}
 #dm_table <- datatable(dm_2013_df)
-dm_table <- datatable(dm_2013_df, options = list(hover=TRUE, compact=TRUE))
+dm_table <- DT::datatable(dm_2013_df,
+                          class = c('compact','table-hover','table-striped'))
 dm_table
 ```

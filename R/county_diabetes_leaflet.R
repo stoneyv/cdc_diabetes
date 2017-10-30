@@ -64,7 +64,7 @@ leaflet(counties2) %>%
               opacity = 1.0) %>%
   addPolygons(data = counties2, color = "grey20", weight = 0.4,
               smoothFactor = 0.5,
-              opacity = 0.3, fillOpacity = 0.5, 
+              opacity = 0.3, fillOpacity = 0.5,
               fillColor = ~pal_func(dm_percent),
               label = ~paste0(county, " : ",
                          formatC(dm_percent, big.mark = ",")),
@@ -72,7 +72,7 @@ leaflet(counties2) %>%
                                         weight = 0.5,
                                         bringToFront = TRUE)) %>%
   addLegend("bottomright", title = "% diabetes",
-            colorNumeric("YlOrRd", counties2$dm_percent), 
+            colorNumeric("YlOrRd", counties2$dm_percent),
             values = ~dm_percent,
             labFormat = labelFormat(suffix = ' %', between = ', ',
                                     transform = function(x) x)) %>%
@@ -82,4 +82,6 @@ leaflet(counties2) %>%
             lat2 = 21.86)
 
 dm_2013_df <- read_feather('../data/cdc_dm_2013.feather')
-dm_table <- datatable(dm_2013_df)
+dm_table <- DT::datatable(dm_2013_df,
+                          class = c('compact','table-hover','table-striped'))
+dm_table
