@@ -41,7 +41,8 @@ info
 <img src="images/screenshot_mapshaper_verify.png"/>
 
 ### 5. Create one of the flexdashboards.  Currently there is a leaflet and a tmap to leaflet implementation.
-NOTE: If you receive a YAML error you may be missing the CRAN rmapshaper library.  If you have difficulty installing the rmapshaper library you may be missing the folowing system libraries. jq, protobuf, protobuf-compiler.  You can knit the project without the orientation and it will work without the rmapshaper library.  
+NOTE: If you receive a YAML error you may be missing the CRAN rmapshaper library.  If you have difficulty installing the rmapshaper package you may be missing the folowing system libraries. libjq-dev, libv8-dev,protobuf, and protobuf-compiler.  You can install these system libraries and then install the CRAN package rmapshaper.  You can also knit the project without the orientation and it will work without the rmapshaper library.  
+
 a. Open the ./R/county_diabetes_leaflet.Rmd file in rstudio.  
 b. Click the knit button to generate the flexdashboard html file.  
 c. There is an R version of the file to make it easier to debug modifications to the dashboard.  
