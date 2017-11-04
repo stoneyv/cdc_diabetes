@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>US Diabetes Dx by county 2013</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
+
+  <style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		#map {
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+
+</head>
+<body>
+
+   <div id="mapid" style="width: 800px; height: 533px;"></div>
+
+     <!-- <script type="text/javascript" src="cdc_diabetes_2013_us_county_akhi_20m.js"></script> -->
+     <script type="text/javascript" src="us-states.js"></script>
+
+     <script>
+       function getColor(d) {
+        return d > 28 ? '#800026' :
+               d > 24 ? '#BD0026' :
+               d > 20 ? '#E31A1C' :
+               d > 16 ? '#FC4E2A' :
+               d > 12 ? '#FD8D3C' :
+               d > 8  ? '#FEB24C' :
+               d > 4  ? '#FED976' :
+                        '#FFEDA0';
+       }
+
+      function style(feature) {
+          return {
+              fillColor: getColor(feature.properties.density),
+              weight: 1,
+              opacity: 0.6,
+              color: 'grey',
+              dashArray: '3',
+              fillOpacity: 0.7
+          };
+      }
+
+       var diabetes_map = L.map('mapid').setView([37, -96], 4);
+       L.geoJson(statesData).addTo(diabetes_map);
+       L.geoJson(statesData, {style: style}).addTo(diabetes_map);
+
+     </script>
+</body>
+
+</html>
