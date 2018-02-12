@@ -7,6 +7,8 @@ https://rockourdata.nyc3.digitaloceanspaces.com/county_diabetes_tmap_flexdash.ht
 leaflet flexdashboard  
 https://rockourdata.nyc3.digitaloceanspaces.com/county_diabetes_leaflet.html  
 
+<img src="images/2013_percentage_DM2_dx_by_county.png"/>
+
 ### 1. Clone the repository  
 ```bash
 git clone https://github.com/stoneyv/cdc_diabetes.git
