@@ -21,10 +21,15 @@ chmod +x download-data-cdc.sh
 ```
 NOTE: If you are using a MS Windows OS and do not have a bash shell or an Rscript command, you can still call R scripts from the command line by invoking R with the -e option.  Look below for an example of invoking R from a regular Windows shell.
 
+If you have installed the Anaconda package manager for python and jupyter, there is also shell that includes a bash shell with common unix utilities.  This will allow you to run the bash shell script that automatically downloads the data and unpacks the files into a directory structure.   
+https://www.anaconda.com/download
+
 MS now officially supports an Ubuntu subsystem for Windows 10 with the caveat of not manipulating subsystem files with Windows applications.  With older versions of Windows you might install cygwin so that you can run the data download bash shell script.  
+https://www.cygwin.com/  
+https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 ### 3. Create shapefiles with AK,HI below the US.
-Bob Rudis explains how to do this with maptools::elide here  
+Bob Rudis explains how to do this with maptools::elide here   
 https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/  
 ```bash
 Rscript ./R/create_county_akhi.R
