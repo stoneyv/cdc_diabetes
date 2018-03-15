@@ -19,16 +19,21 @@ cd cdc_diabetes
 chmod +x download-data-cdc.sh  
 ./download-data-cdc.sh
 ```
+NOTE: MS Windows OS users can use the bash shell script for downloading and unpacking the data files by using one of these options.  
+a. Anaconda bash shell with unix utilities  
+https://www.anaconda.com/download  
+b. Cygwin bash shell with unix utilities    
+https://www.cygwin.com/  
+c. MS Windows Linux subsytem   
+https://docs.microsoft.com/en-us/windows/wsl/install-win10  
+
 NOTE: If you are using a MS Windows OS and do not have a bash shell or an Rscript command, you can still call R scripts from the command line by invoking R with the -e option.  Look below for an example of invoking R from a regular Windows shell.
 
-If you have installed the Anaconda package manager for python and jupyter, there is also shell that includes a bash shell with common unix utilities.  This will allow you to run the bash shell script that automatically downloads the data and unpacks the files into a directory structure.   
-https://www.anaconda.com/download
+### 3. Install system libraries and R packages
+a. system libraries GDAL and GEOS  
+b. R packages  
 
-MS now officially supports an Ubuntu subsystem for Windows 10 with the caveat of not manipulating subsystem files with Windows applications.  With older versions of Windows you might install cygwin so that you can run the data download bash shell script.  
-https://www.cygwin.com/  
-https://docs.microsoft.com/en-us/windows/wsl/install-win10
-
-### 3. Create shapefiles with AK,HI below the US.
+### 4. Create shapefiles with AK,HI below the US.
 Bob Rudis explains how to do this with maptools::elide here   
 https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/  
 ```bash
@@ -36,7 +41,7 @@ Rscript ./R/create_county_akhi.R
 Rscript ./R/create_state_akhi.R
 ```
 
-### 4. Transform the CDC diabetes and obesity data
+### 5. Transform the CDC diabetes and obesity data
 This loads data from spreadsheets and joins it with a modified 2013 US Census County shapefile.  
 ```bash
 Rscript ./R/transform_cdc_data.R
@@ -47,7 +52,7 @@ info
 ```
 <img src="images/screenshot_mapshaper_verify.png"/>
 
-### 5. Create one of the flexdashboards.  Currently there is a leaflet and a tmap to leaflet implementation.
+### 6. Create one of the flexdashboards.  Currently there is a leaflet and a tmap to leaflet implementation.
 NOTE: If you receive a YAML error you may be missing the CRAN rmapshaper library.  If you have difficulty installing the rmapshaper package you may be missing the folowing system libraries. libjq-dev, libv8-dev,protobuf, and protobuf-compiler.  You can install these system libraries and then install the CRAN package rmapshaper.  You can also knit the project without the orientation and it will work without the rmapshaper library.  
 
 a. Open the ./R/county_diabetes_leaflet.Rmd file in rstudio.  
